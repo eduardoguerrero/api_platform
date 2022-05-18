@@ -12,6 +12,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -47,18 +48,26 @@ class CheeseListing
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"cheese_listing:read","cheese_listing:write"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     maxMessage="Describe your cheese in 50 chars or less"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"cheese_listing:read"})
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
      * @Groups({"cheese_listing:read","cheese_listing:write"})
+     * @Assert\NotBlank()
      */
     private $price;
 
