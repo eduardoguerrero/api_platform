@@ -2,10 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"user:read"}},
+ *     denormalizationContext={"groups"={"user:write"}}
+ * )
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -18,6 +28,11 @@ class User implements UserInterface
     private $id;
 
     /**
+     * Field that I need to expose
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     * @Groups({"user:read", "user:write"})
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -28,26 +43,39 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @Groups({"user:write"})
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
+     * @Assert\NotBlank()
+     * @Groups({"user:read", "user:write"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -77,6 +105,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -92,6 +124,10 @@ class User implements UserInterface
         return (string)$this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -116,6 +152,10 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @param string $username
+     * @return $this
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
