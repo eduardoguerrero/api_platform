@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -51,10 +53,21 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank()
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:read", "user:write","cheese_listing:get"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner")
+     * @Groups({"user:read", "user:write"})
+     */
+    private $cheeseListings;
+
+    public function __construct()
+    {
+        $this->cheeseListings = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -159,6 +172,45 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CheeseListing[]
+     */
+    public function getCheeseListings(): Collection
+    {
+        return $this->cheeseListings;
+    }
+
+    /**
+     * @param CheeseListing $cheeseListing
+     * @return $this
+     */
+    public function addCheeseListing(CheeseListing $cheeseListing): self
+    {
+        if (!$this->cheeseListings->contains($cheeseListing)) {
+            $this->cheeseListings[] = $cheeseListing;
+            $cheeseListing->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CheeseListing $cheeseListing
+     * @return $this
+     */
+    public function removeCheeseListing(CheeseListing $cheeseListing): self
+    {
+        if ($this->cheeseListings->contains($cheeseListing)) {
+            $this->cheeseListings->removeElement($cheeseListing);
+            // set the owning side to null (unless already changed)
+            if ($cheeseListing->getOwner() === $this) {
+                $cheeseListing->setOwner(null);
+            }
+        }
 
         return $this;
     }
