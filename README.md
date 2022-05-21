@@ -122,9 +122,9 @@ API platform will create the relation between user and cheese
 "username": "rene.escobar",
 "cheeseListings": [
   {
-        "title": "blue cheese",
-        "price": 2000,
-        "description":"short description"
+      "title": "blue cheese",
+      "price": 2000,
+      "description":"short description"
   }
  ]
 }
