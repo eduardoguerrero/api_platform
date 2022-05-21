@@ -95,13 +95,12 @@ php bin/console make:entity
 php bin/console doctrine:schema:drop --full-database --force
 ```
 
-### Use IRI (Internationalized Resource Identifier) instead ID
+### Creates a cheeses resource.
 
-```json
-Have a look to the owner value:
+Use IRI (Internationalized Resource Identifier) instead ID and have a look to the owner value.
 
 /api/cheeses POST
-
+```json
 {
     "title": "This is a new chees",
     "price": 1000,
@@ -110,23 +109,35 @@ Have a look to the owner value:
 }
 ```
 
-### The new User resource
-
-```json
+### Creates a user resource.
 
 API platform will create the relation between user and cheese
 
+/api/users POST
+```json
 {
 "email": "escobarguerrer@gmail.com",
 "password": "xxxxx",
 "username": "rene.escobar",
-"cheeseListings": [
-  {
+"cheeseListings":[
+   {
       "title": "blue cheese",
       "price": 2000,
       "description":"short description"
-  }
- ]
+   } 
+  ]
 }
+```
 
+### Relaces the user resource
+
+PUT /api/users/{id}
+
+```json
+{
+    "cheeseListings": [    
+      "api/cheeses/1",
+      "api/cheeses/2"    
+   ]
+}
 ```
