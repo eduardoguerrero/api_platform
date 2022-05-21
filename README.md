@@ -57,3 +57,76 @@ And as always, thanks so much for your support and letting
 us do what we love!
 
 <3 Your friends at SymfonyCasts
+
+
+## Useful commands
+
+```bash
+symfony serve -d
+
+composer require api
+
+composer require maker:1.11 --dev
+
+php bin/console make:entity
+
+composer require migrations:2.0.0 -W
+
+php /bin/console doctrine:database:create
+
+php bin/console make:migration
+
+php bin/console doctrine:migrations:migrate
+
+php /bin/console debug:router
+
+composer require nesbot/carbon
+
+php bin/console debug:config api_platform
+
+symfony server:stop
+
+http://localhost:8000/api/cheeses/1.csv
+
+http://localhost:000/api/cheeses.csv
+
+php bin/console make:entity
+
+php bin/console doctrine:schema:drop --full-database --force
+```
+
+### Use IRI (Internationalized Resource Identifier) instead ID
+
+```json
+Have a look to the owner value:
+
+/api/cheeses POST
+
+{
+    "title": "This is a new chees",
+    "price": 1000,
+    "owner": "/api/users/1",
+    "description": "This is short description"
+}
+```
+
+### The new User resource
+
+```json
+
+API platform will create the relation between user and cheese
+
+{
+"email": "escobarguerrer@gmail.com",
+"password": "xxxxx",
+"username": "rene.escobar",
+"cheeseListings": [
+  {
+        "title": "blue cheese",
+        "price": 2000,
+        "description":"short description"
+  }
+ ]
+}
+
+```

@@ -49,7 +49,7 @@ class CheeseListing
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"cheese_listing:read","cheese_listing:write","user:read"})
+     * @Groups({"cheese_listing:read","cheese_listing:write","user:read","user:write"})
      * @Assert\NotBlank()
      * @Assert\Length(
      *     min=2,
@@ -68,7 +68,7 @@ class CheeseListing
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"cheese_listing:read","cheese_listing:write","user:read"})
+     * @Groups({"cheese_listing:read","cheese_listing:write","user:read","user:write"})
      * @Assert\NotBlank()
      */
     private $price;
@@ -160,7 +160,7 @@ class CheeseListing
     /**
      * The description of the cheese as raw text
      *
-     * @Groups({"cheese_listing:write"})
+     * @Groups({"cheese_listing:write","user:write"})
      * @SerializedName("description")
      * @param string $description
      * @return $this
