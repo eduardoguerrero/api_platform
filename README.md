@@ -113,7 +113,7 @@ Use IRI (Internationalized Resource Identifier) instead ID and have a look to th
 
 API platform will create the relation between user and cheese
 
-/api/users POST
+POST /api/users
 ```json
 {
 "email": "escobarguerrer@gmail.com",
@@ -129,7 +129,7 @@ API platform will create the relation between user and cheese
 }
 ```
 
-### Relaces the user resource
+### Replaces the user resource
 
 PUT /api/users/{id}
 
@@ -140,4 +140,79 @@ PUT /api/users/{id}
       "api/cheeses/2"    
    ]
 }
+```
+
+### Retrieves a User resource
+
+GET /api/users/{id}
+
+http://127.0.0.1:8000/api/users/2.json
+
+```json
+{
+  email: "escobarguerrero2@gmail.com",
+  username: "rene.escobar03",
+  cheeseListings: [
+  {
+      title: "This is a new chees",
+      price: 1000,
+   },
+   {
+      title: "Hmm new cheese",
+      price: 1000,
+    },
+  ],
+}
+
+```
+
+Retrieve just username
+
+http://127.0.0.1:8000/api/users/2.json?properties[]=username
+```json
+{
+  username: "rene.escobar03"
+}
+```
+
+Retrieve just username and title
+
+http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseListings][]=title
+```json
+{
+  username: "rene.escobar03",
+  cheeseListings: [
+    {
+      title: "This is a new chees"
+    },
+    {
+      title: "Hmm new cheese"
+    },
+  ],
+}
+```
+
+### Retrieves the collection of cheeses resources
+
+GET /api/users/{id}/cheese_listings
+
+```json
+[
+  {
+    "title": "This is a new chees",
+    "description": "This is short description",
+    "price": 1000,
+    "owner": "/api/users/2",
+    "shortDescription": "This is short description",
+    "createdAtAgo": "2 days ago"
+  },
+  {
+    "title": "Hmm new cheese",
+    "description": "Short description",
+    "price": 1000,
+    "owner": "/api/users/2",
+    "shortDescription": "Short description",
+    "createdAtAgo": "2 days ago"
+  }
+]
 ```
