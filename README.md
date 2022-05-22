@@ -175,6 +175,7 @@ http://127.0.0.1:8000/api/users/2.json?properties[]=username
 }
 ```
 
+
 Retrieve just username and title
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseListings][]=title
@@ -217,5 +218,9 @@ GET /api/users/{id}/cheese_listings
   }
 ]
 ```
+
+### API docs
+
+http://127.0.0.1:8000/api/docs
 
 ![Alt text](example.png?raw=true "Api docs")
