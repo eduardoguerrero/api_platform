@@ -100,7 +100,7 @@ php bin/console doctrine:schema:drop --full-database --force
 Use IRI (Internationalized Resource Identifier) instead ID and have a look to the owner value.
 
 /api/cheeses POST
-```json
+```
 {
     "title": "This is a new chees",
     "price": 1000,
@@ -114,7 +114,8 @@ Use IRI (Internationalized Resource Identifier) instead ID and have a look to th
 API platform will create the relation between user and cheese
 
 POST /api/users
-```json
+
+```
 {
 "email": "escobarguerrer@gmail.com",
 "password": "xxxxx",
@@ -133,7 +134,7 @@ POST /api/users
 
 PUT /api/users/{id}
 
-```json
+```
 {
     "cheeseListings": [    
       "api/cheeses/1",
@@ -148,7 +149,7 @@ GET /api/users/{id}
 
 http://127.0.0.1:8000/api/users/2.json
 
-```json
+```
 {
   email: "escobarguerrero2@gmail.com",
   username: "rene.escobar03",
@@ -180,7 +181,7 @@ Retrieve just username and title
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseListings][]=title
 
-```json
+```
 {
   username: "rene.escobar03",
   cheeseListings: [
@@ -198,7 +199,7 @@ http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseLi
 
 GET /api/users/{id}/cheese_listings
 
-```json
+```
 [
   {
     "title": "This is a new chees",
