@@ -109,7 +109,7 @@ Use IRI (Internationalized Resource Identifier) instead ID and have a look to th
 }
 ```
 
-### Creates a user resource.
+### Creates a user resource
 
 API platform will create the relation between user and cheese
 
@@ -153,22 +153,22 @@ http://127.0.0.1:8000/api/users/2.json
   email: "escobarguerrero2@gmail.com",
   username: "rene.escobar03",
   cheeseListings: [
-  {
+    {
       title: "This is a new chees",
       price: 1000,
-   },
-   {
+    },
+    {
       title: "Hmm new cheese",
       price: 1000,
     },
   ],
 }
-
 ```
 
 Retrieve just username
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username
+
 ```json
 {
   username: "rene.escobar03"
@@ -178,6 +178,7 @@ http://127.0.0.1:8000/api/users/2.json?properties[]=username
 Retrieve just username and title
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseListings][]=title
+
 ```json
 {
   username: "rene.escobar03",
@@ -216,3 +217,5 @@ GET /api/users/{id}/cheese_listings
   }
 ]
 ```
+
+![Alt text](example.png?raw=true "Api docs")
