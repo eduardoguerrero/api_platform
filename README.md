@@ -169,7 +169,7 @@ Retrieve just username
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username
 
-```json
+```
 {
   username: "rene.escobar03"
 }
