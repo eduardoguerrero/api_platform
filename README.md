@@ -166,7 +166,7 @@ http://127.0.0.1:8000/api/users/2.json
 }
 ```
 
-Retrieve just username
+### Retrieve just username
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username
 
@@ -177,7 +177,7 @@ http://127.0.0.1:8000/api/users/2.json?properties[]=username
 ```
 
 
-Retrieve just username and title
+### Retrieve just username and title
 
 http://127.0.0.1:8000/api/users/2.json?properties[]=username&properties[cheeseListings][]=title
 
