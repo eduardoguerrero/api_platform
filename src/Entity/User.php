@@ -57,7 +57,7 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank()
-     * @Groups({"user:read", "user:write","cheese_listing:get"})
+     * @Groups({"user:read", "user:write","cheese_listing:get","cheese_listing:write"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
